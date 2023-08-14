@@ -1,0 +1,78 @@
+h3 {
+  text-align: left;
+}
+
+.casts {
+  width: 100%;
+  overflow-wrap: break-word;
+  margin: 0 auto;
+}
+
+.cast {
+  border: 1px solid #fff;
+  display: flex;
+  flex-direction: column;
+  margin: 5px auto;
+  border-radius: 5px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  padding: 5px;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.metadata {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.metadata p {
+  margin: 0;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.author {
+  font-weight: bold;
+}
+
+.timestamp {
+  font-size: 12px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  font-size: 11px;
+  padding-right: 5px;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.text {
+  text-align: left;
+  font-size: 16px;
+  overflow-wrap: normal;
+  padding: 10px;
+}
+
+.footer a {
+  font-size: 12px;
+  text-decoration: none;
+  color: #fff;
+  margin-top: 10px;
+}
+.footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
