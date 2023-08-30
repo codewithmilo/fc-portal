@@ -2,56 +2,52 @@ import { useEffect, useState } from 'react'
 import { Cast, getCastsFromParentSource } from '../lib/database'
 import './CastThread.css'
 
-export default function CastThread({ url }: { url: string }) {
-  const [casts, setCasts] = useState<Cast[]>([])
-
-  useEffect(() => {
-    ;(async function getCasts() {
-      const casts: Cast[] = await getCastsFromParentSource(url)
-      setCasts(casts)
-    })()
-  }, [])
-
+export default function CastThread({ url, casts }: { url: string; casts: Cast[] }) {
   const open = (username: string, hash: string) => {
     const url = getWcUrl(username, hash)
     chrome.tabs.create({ url })
   }
 
+  if (casts.length === 0) {
+    return (
+      <div className="empty">
+        <h3>No casts yet</h3>
+      </div>
+    )
+  }
+
   return (
-    <>
-      <h3>Threads</h3>
-      <div className="casts">
-        {casts.map((cast) => (
-          <div className="cast">
-            <div className="header">
-              <img
-                className="avatar"
-                src={cast.author_pfp_url as string}
-                alt="avatar"
-                width={48}
-                height={48}
-              />
-              <div className="metadata">
-                <p className="author">{cast.author_display_name}</p>
-                <p className="timestamp">{formatDate(cast.published_at)}</p>
-              </div>
-              <div className="spacer"></div>
-              <div className="info">
-                <div>❤ {cast.reactions_count}</div>
-                <div>↻ {cast.recasts_count}</div>
-                <div>↧ {cast.replies_count}</div>
-              </div>
+    <div className="casts">
+      {/* show max 20 for now, shouldn't be more than this ever really */}
+      {casts.slice(0, 20).map((cast, i) => (
+        <div
+          key={i}
+          className="cast"
+          onClick={() => open(cast.author_username as string, cast.hash)}
+        >
+          <div className="header">
+            <img
+              className="avatar"
+              src={cast.author_pfp_url as string}
+              alt="avatar"
+              width={28}
+              height={28}
+            />
+            <div className="metadata">
+              <span className="author">{cast.author_display_name}</span>
             </div>
-            <div className="text">{cast.text}</div>
-            <div className="footer">
-              <a href="" onClick={() => open(cast.author_username as string, cast.hash)}>
-                Open in Warpcast
-              </a>
+            <div className="spacer"></div>
+            <div className="info">
+              <span className="timestamp">{formatDate(cast.published_at)}</span>
             </div>
           </div>
-        ))}
-      </div>
-    </>
+          <div className="text">{cast.text}</div>
+          <div className="footer">
+            <span className="replies">{repliesString(cast.replies_count as number)}</span>
+          </div>
+        </div>
+      ))}
+    </div>
   )
 }
 
@@ -84,4 +80,10 @@ const formatDate = (date: string) => {
   })
 
   return rtf.format(Math.round(diff) * -1, unit as Intl.RelativeTimeFormatUnit)
+}
+
+const repliesString = (count: number) => {
+  if (count === 0) return ''
+  if (count === 1) return '↧ 1 reply'
+  return `↧ ${count} replies`
 }

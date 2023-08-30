@@ -16,7 +16,9 @@ function SignIn({ set }: { set: any }) {
     }
   }, [signer])
 
-  return signer.isConnected === false ? <QRCode value={token.deepLink} size={168} /> : null
+  return signer.isConnected === false ? (
+    <QRCode style={{ margin: '0 auto' }} value={token.deepLink} size={168} />
+  ) : null
 }
 
 export default SignIn

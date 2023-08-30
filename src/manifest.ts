@@ -3,7 +3,7 @@ import { defineManifest } from '@crxjs/vite-plugin'
 export default defineManifest({
   name: 'Farcaster Portal',
   description: 'A browser extension to bridge Farcaster with any webpage',
-  version: '0.1.0',
+  version: '1.0.0',
   manifest_version: 3,
   icons: {
     '16': 'img/logo-16.png',

@@ -1,56 +1,71 @@
-h3 {
-  text-align: left;
+.empty {
+  height: 41vh;
+}
+
+.empty h3 {
+  text-align: center;
 }
 
 .casts {
   width: 100%;
   overflow-wrap: break-word;
   margin: 0 auto;
+  border-bottom: 1px solid #000;
 }
 
 .cast {
-  border: 1px solid #fff;
+  border-top: 1px solid #000;
   display: flex;
   flex-direction: column;
-  margin: 5px auto;
-  border-radius: 5px;
+  background-color: white;
+  color: black;
+}
+
+.cast:hover {
+  background-color: #f5f5f5;
+  cursor: pointer;
 }
 
 .header {
   display: flex;
   flex-direction: row;
   justify-content: start;
+  align-items: center;
   padding: 5px;
 }
 
 .avatar {
   border-radius: 50%;
+  border: 1px solid lightgrey;
 }
 
 .metadata {
   display: flex;
-  flex-direction: column;
-  justify-content: start;
-}
-
-.metadata p {
-  margin: 0;
-  text-align: left;
-  padding-left: 10px;
+  flex-direction: row;
 }
 
 .author {
+  margin-left: 10px;
   font-weight: bold;
 }
 
-.timestamp {
-  font-size: 12px;
+.wc {
+  position: relative;
+  top: -0.1rem;
+}
+
+.wc a {
+  margin-left: 5px;
+  font-size: 10px;
+  text-decoration: none;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 2px;
 }
 
 .info {
   display: flex;
-  flex-direction: column;
-  text-align: right;
+  flex-direction: row;
   font-size: 11px;
   padding-right: 5px;
 }
@@ -63,16 +78,32 @@ h3 {
   text-align: left;
   font-size: 16px;
   overflow-wrap: normal;
-  padding: 10px;
+  margin: 5px 0 0 10px;
+  font-family: sans-serif;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 25px 0 5px 10px;
+}
+
+.replies {
+  font-size: 12px;
+}
+
+.openReplyInput {
+  margin-left: 5px;
 }
 
 .footer a {
   font-size: 12px;
   text-decoration: none;
-  color: #fff;
-  margin-top: 10px;
+  color: #000;
 }
 .footer a:hover {
-  color: #fff;
+  color: #000;
   text-decoration: underline;
 }

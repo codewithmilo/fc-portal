@@ -1,16 +1,16 @@
-import { castsFromParentSourceExist } from '../lib/database'
+import { castsFromParentSourceCount } from '../lib/database'
 
-let hasThread
+let castCount
 
 const getAndStoreUrlThreadStatus = async () => {
   const url = window.location.href
-  hasThread = await castsFromParentSourceExist(url)
+  castCount = await castsFromParentSourceCount(url)
 
   // store in browser so popup doesn't need to make another request
-  chrome.storage.local.set({ [url]: hasThread })
+  chrome.storage.local.set({ [url]: castCount })
 
   // then tell background to update the icon based on thread status
-  await chrome.runtime.sendMessage({ hasThread })
+  await chrome.runtime.sendMessage({ castCount })
 }
 
 getAndStoreUrlThreadStatus()

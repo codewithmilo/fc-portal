@@ -1,22 +1,42 @@
 body {
   background-color: #8465cb;
   color: #fff;
-  font-family: sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial,
+    sans-serif;
   width: 100%;
-  height: 100%;
   font-size: 14px;
   line-height: 1.5;
   margin: 0;
   padding: 0;
   text-align: center;
+  overscroll-behavior: none;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .body {
-  padding: 20px;
+  height: auto;
+  min-height: 600px;
+  width: 100vw;
+  animation: fadeInAnimation ease 1s;
+  animation-iteration-count: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  margin: 0 auto;
 }
 
 h1 {
-  margin-top: -10px;
+  margin: -5px 0 10px 0;
 }
 
 .signin {
@@ -31,6 +51,26 @@ h1 {
   overflow-wrap: break-word;
   margin: 0 auto;
   border-radius: 5px;
+}
+
+.sections {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 10px;
+}
+
+.sections:hover {
+  cursor: pointer;
+}
+
+.sections h2 {
+  opacity: 0.8;
+}
+
+.selected {
+  opacity: 1 !important;
+  border-bottom: 2px solid #fff;
 }
 
 .signout:hover {
