@@ -8,14 +8,17 @@
 2. Change or configurate the name of your extension on `src/manifest`.
 3. Run `npm install` to install the dependencies.
 
+## Development
+
+1. Run `npm run dev`
+2. Go to chrome://extensions
+3. Toggle on "Developer mode"
+4. Click 'Load unpacked', and select the `/build` folder
+
+This will auto-update the extension on any code changes!
+
 ## TODO
 
-- update URL's cast immediately after sending
-- mentions in text input
-  - @mention of users should work
-- full threads (collapsible)
-  - show all replies to casts, not just the top level with a reply count
-- inline reply option
-  - allow replying to any cast, not just a top level cast
-- etherscan URLs convert to chain links
-  - (from kmacb.eth) etherscan links change from https to chain://...
+- update URL's cast immediately after sending (currently takes up to 1 minute)
+- allow user setting of which web client to use for replies
+  - instead of building an entire read/write client in the extension, fall back on the multitude of existing clients
