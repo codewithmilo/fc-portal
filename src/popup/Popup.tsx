@@ -63,7 +63,7 @@ function App() {
 
   return (
     <div className="body">
-      <Menu signout={signout} />
+      {isConnected && <Menu signout={signout} />}
       <img src="img/logo-zoomed.png" alt="Farcaster Portal logo" width={64} className="logo" />
       <h1>Farcaster Portal</h1>
       {isConnected === false ? (

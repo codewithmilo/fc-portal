@@ -23,13 +23,16 @@ const generateKeyPair = async (): Promise<keyGeneration> => {
 const createSignature = async (publicKeyBytes: Uint8Array): Promise<string> => {
   const publicKey = `0x${Buffer.from(publicKeyBytes).toString('hex')}`
   console.log(publicKey)
-  const response = await fetch('http://localhost:3333/api/v1/createSignature', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    'https://express-server-production-a071.up.railway.app/api/v1/createSignature',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ publicKey }),
     },
-    body: JSON.stringify({ publicKey }),
-  })
+  )
   const { signature } = await response.json()
   return signature
 }
