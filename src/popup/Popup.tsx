@@ -1,10 +1,11 @@
-import { useCheckSigner } from '@farsign/hooks'
+import { useCheckSigner } from '../lib/signerHooks'
 import SignIn, { CLIENT_NAME } from '../components/SignIn'
 import { useEffect, useState } from 'react'
 import CastForm from '../components/CastForm'
 import CastThread from '../components/CastThread'
 import './Popup.css'
 import { Cast, getCastsFromParentSource } from '../lib/database'
+import Menu from '../components/Menu'
 
 function App() {
   const [isConnected, setIsConnected] = useCheckSigner(CLIENT_NAME)
@@ -62,6 +63,7 @@ function App() {
 
   return (
     <div className="body">
+      <Menu signout={signout} />
       <img src="img/logo-zoomed.png" alt="Farcaster Portal logo" width={64} className="logo" />
       <h1>Farcaster Portal</h1>
       {isConnected === false ? (

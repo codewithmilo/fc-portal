@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './CastForm.css'
-import { SignerData, useEncryptedSigner, useToken } from '@farsign/hooks'
+import { SignerData, useEncryptedSigner, useToken } from '../lib/signerHooks'
 import { CLIENT_NAME, STORAGE_KEY } from './SignIn'
 import {
   CastAddBody,
@@ -34,7 +34,7 @@ export default function CastForm({ url }: { url: string }) {
     setError('')
     setSuccess(false)
 
-    const request: SignerData = JSON.parse(localStorage.getItem(STORAGE_KEY)!).signerRequest
+    const request: SignerData = JSON.parse(localStorage.getItem(STORAGE_KEY)!).signedKeyRequest
     const client = getHubRpcClient('https://5548ae.hubs.neynar.com:2283', {})
 
     const fidMentions = mentions.map((m: MentionItem) => parseInt(m.id))
@@ -48,7 +48,7 @@ export default function CastForm({ url }: { url: string }) {
         mentions: fidMentions,
         mentionsPositions,
       }),
-      { fid: request.fid, network: FarcasterNetwork.MAINNET },
+      { fid: request.userFid, network: FarcasterNetwork.MAINNET },
       encryptedSigner as NobleEd25519Signer,
     )
 
@@ -57,12 +57,14 @@ export default function CastForm({ url }: { url: string }) {
       .then((res) => {
         setIsSubmitting(false)
         setSuccess(true)
-        setResult(JSON.stringify(res))
         // TODO update casts cache
       })
       .catch((err) => {
+        if (err.error.errCode === 'unknown') {
+          return setSuccess(true)
+        }
         setIsSubmitting(false)
-        setError(err.message)
+        setError(JSON.stringify(err))
       })
   }
 

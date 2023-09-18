@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Cast, getCastsFromParentSource } from '../lib/database'
 import './CastThread.css'
+import { Client } from './Menu'
 
 export default function CastThread({ url, casts }: { url: string; casts: Cast[] }) {
   const open = (username: string, hash: string) => {
-    const url = getWcUrl(username, hash)
+    const url = getClientUrl(username, hash)
     chrome.tabs.create({ url })
   }
 
@@ -51,8 +52,19 @@ export default function CastThread({ url, casts }: { url: string; casts: Cast[] 
   )
 }
 
-const getWcUrl = (username: string, hash: string) => {
-  return `https://warpcast.com/${username}/${hash.slice(0, 8)}`
+const getClientUrl = (username: string, hash: string) => {
+  const client = (localStorage.getItem('client') || Client.WARPCAST) as Client
+
+  switch (client) {
+    case Client.WARPCAST:
+      return `https://warpcast.com/${username}/${hash.slice(0, 8)}`
+    case Client.DISCOVE:
+      return `https://discove.xyz/threads/${hash}/${hash}`
+    case Client.PHRASETOWN:
+      return `https://phrasetown.com/app/cast/${hash}`
+    case Client.JAM:
+      return `https://jam.so/cast/${hash}`
+  }
 }
 
 const formatDate = (date: string) => {

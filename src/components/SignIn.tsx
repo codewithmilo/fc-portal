@@ -1,4 +1,4 @@
-import { useToken, useSigner } from '@farsign/hooks'
+import { useToken, useSigner } from '../lib/signerHooks'
 import { useEffect } from 'react'
 import QRCode from 'react-qr-code'
 
