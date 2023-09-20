@@ -41,7 +41,7 @@ const createSignature = async (publicKeyBytes: Uint8Array): Promise<string> => {
 const sendPublicKey = async (publicKey: Uint8Array, signature: string): Promise<weirdResult> => {
   const convertedKey = bytesToHexString(publicKey)._unsafeUnwrap()
 
-  const fid = 8988
+  const fid = 20187
   const deadline = Math.floor(Date.now() / 1000) + 86400 // signature is valid for 1 day
   const body = {
     key: convertedKey,
